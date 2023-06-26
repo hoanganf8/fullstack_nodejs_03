@@ -1,0 +1,33 @@
+.title::before {
+    content: '<';    
+}
+
+.title::after {
+    content: '>';
+}
+
+.sub-title::before {
+    content: attr(data-name);
+}
+
+.content p::first-line {
+    color: red;
+}
+
+.content p::first-letter {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.content p::selection {
+    background: black;
+    color: yellow;
+}
+
+.fullname {
+    color: red;
+}
+
+.fullname::placeholder {
+    color: currentColor;
+}

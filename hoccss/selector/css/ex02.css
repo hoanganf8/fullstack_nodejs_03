@@ -1,0 +1,36 @@
+/* .box h2 ~ p, .box h2 ~ div p {
+    color: red;
+} */
+/* 
+.box h2 ~ div p {
+    color: red;
+} */
+
+/*
+p: đứng sau thẻ h2
+p và h2 cùng là con của .box
+*/
+
+/* .box p + h2 {
+    color: red;
+} */
+
+/* .box p + h2, .box p + h2 + h2 {
+    color:red;
+} */
+
+.box h2 + h2 {
+    color: red;
+}
+
+/*
+Trong các thẻ html sẽ có các state
+:hover 
+:active 
+:checked
+...
+*/
+
+.todos input:checked ~ span {
+    color: red;
+}
