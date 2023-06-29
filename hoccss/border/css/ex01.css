@@ -1,0 +1,30 @@
+.box {
+  width: 200px;
+  /* border-width: 3px;
+  border-style: double;
+  border-color: red; */
+  /* border: 3px double red; */
+  /* border-left: 3px solid red;
+  border-right: 3px solid green;
+  border-top: 3px solid blue;
+  border-bottom: 3px solid blueviolet; */
+
+  border-left-width: 3px;
+  border-top-width: 3px;
+  border-right-width: 3px;
+  border-bottom-width: 3px;
+
+  border-top-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+
+  border-top-color: red;
+  border-left-color: green;
+  border-right-color: blue;
+  border-bottom-color: blueviolet;
+}
+
+/*
+border-style: none | solid | dashed | dotted | double
+*/

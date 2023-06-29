@@ -1,0 +1,34 @@
+/* .box {
+  color: rgba(255, 0, 115, 0.5);
+} */
+
+/*
+color: 
+- Tên màu
+- rgb()
+- hsl()
+- hexa
+
+=> color picker
+
+2 giá trị kế thừa
+
+- inherit => Kế thừa từ thành phần cha trực tiếp
+- initial => Kế thừa mặc định trình duyệt
+*/
+
+body {
+  color: green;
+}
+
+.content {
+  color: red;
+}
+
+/* .content p {
+  color: inherit;
+} */
+
+.content p:hover {
+  color: initial;
+}
