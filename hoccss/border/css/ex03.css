@@ -1,0 +1,23 @@
+.btn-wrap {
+  text-align: center;
+}
+
+.btn {
+  border: none;
+  background: green;
+  color: #fff;
+  height: 30px;
+  /* border-radius: 0 0 10px 10px; */
+  /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px; */
+  border-radius: 99px;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background: green;
+  border-radius: 50%;
+}

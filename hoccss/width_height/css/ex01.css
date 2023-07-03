@@ -1,0 +1,54 @@
+/*
+width, height chỉ hoạt động với thẻ block
+*/
+
+body {
+  height: 2000px;
+}
+
+.box {
+  background: green;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  border: 1px solid red;
+  width: 400px;
+}
+
+/* .span {
+  border: 1px solid red;
+  width: 200px;
+  height: 200px;
+  display: block;
+} */
+
+/*
+Tìm hiểu về vw, vh
+- vw = viewport width
+- vh = viewport height
+*/
+
+.img {
+  width: 300px;
+  height: auto;
+}
+
+/*
+1. Tại sao thẻ img lại css được width, height?
+    *Thẻ inline có các hạn chế sau:
+        - Không đặt được kích thước: width, height, v.v
+        - Không margin & padding theo chiều dọc (top, bottom)
+    - Thẻ inline có 2 loại:
+        - Replace elements (img, input, v.v)
+        - Non-replace elements
+2. Tại sao các thẻ img đứng cạnh nhau lại có khoảng trắng ngang và dọc?
+
+
+- inline
+- inline-block
+- block
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
+*/
