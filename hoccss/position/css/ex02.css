@@ -14,19 +14,39 @@
 .product img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
 .product .product-info {
   padding: 5px 10px;
 }
 
+.product .product-image {
+  position: relative;
+}
+
 .product .sale {
   position: absolute;
   right: 0;
-  top: 0;
+  bottom: 0;
   background: rgba(255, 0, 0, 0.796);
   color: #fff;
   font-size: 0.8rem;
   padding: 3px 5px;
   border-radius: 3px;
+}
+
+.product .overlay {
+  position: absolute;
+  /* top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
+  inset: 0;
+  background: #00000075;
+  display: none;
+}
+
+.product:hover .overlay {
+  display: block;
 }

@@ -1,0 +1,52 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.songs {
+  width: 300px;
+  margin: 30px auto;
+  border: 1px solid red;
+  counter-reset: song-item;
+}
+
+.songs .item {
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  counter-increment: song-item;
+}
+
+.songs .item::before {
+  content: "#" counter(song-item);
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: green;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 5px;
+}
+
+.songs .children {
+  counter-reset: song-children;
+  padding-left: 20px;
+}
+
+.songs .children .item {
+  counter-increment: song-children;
+}
+
+.songs .children .item::before {
+  content: "#" counter(song-item) "." counter(song-children);
+}
+
+/*
+Tạo bộ đếm CSS
+1. Khởi tạo bộ đếm
+2. Đếm
+3. Gọi bộ đếm vào before, after (Thuộc tính content)
+*/
