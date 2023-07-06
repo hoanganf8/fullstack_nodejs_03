@@ -1,0 +1,27 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.image {
+  width: 400px;
+  margin: 30px auto;
+  border: 1px solid red;
+  padding: 15px;
+}
+
+.image::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.image img {
+  width: 200px;
+  height: 150px;
+  float: left;
+  margin-right: 15px;
+  border-radius: 50%;
+  shape-outside: ellipse();
+}

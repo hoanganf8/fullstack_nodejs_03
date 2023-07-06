@@ -1,0 +1,53 @@
+/*
+Thuộc tính float = Trôi
++ none
++ left
++ right 
+
+Thuộc tính clear = Ngược lại với float
++ left
++ right
++ both
+*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.box {
+  width: 300px;
+  margin: 30px auto;
+  border: 1px solid red;
+  /* overflow: auto; */
+}
+
+.box::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.col-1 {
+  width: 100px;
+  height: 100px;
+  background: red;
+  color: #fff;
+  float: left;
+}
+
+.col-2 {
+  width: 100px;
+  height: 50px;
+  background: green;
+  color: #fff;
+  float: left;
+}
+
+/* .text {
+  clear: both;
+} */
+
+.clearfix {
+  clear: both;
+}
