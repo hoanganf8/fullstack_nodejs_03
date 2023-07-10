@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+.box {
+  border: 1px solid red;
+  padding: 15px;
+}
+
+.box h2 {
+  /* transition-property: padding-left, color, padding-top; */
+  /* transition-property: all; */
+  /* transition-duration: 2s; */
+  /* transition-delay: 1s; */
+  /* transition-timing-function: cubic-bezier(0.075, 0.9, 0.165, 1); */
+  transition: 0.4s linear;
+  transition-property: padding-left, color;
+}
+
+.box h2:hover {
+  padding-left: 100px;
+  /* padding-top: 100px; */
+  color: green;
+}
+
+/*
+transition: Làm chậm quá trình thay đổi giá trị thuộc tính CSS
+- transition-property: tenthuoctinh
+- transition-duration: thoigian (s, ms)
+- transition-delay: thoigian (s, ms)
+- transition-timing-function
++ ease: Chậm - Nhanh - Chậm
++ linear: Tốc độ đều
++ ease-in: Chậm - Nhanh
++ ease-out: Nhanh - Chậm
++ ease-in-out: Chậm - Nhanh - Chậm
++ cubic-bezier: Chia thành 4 giai đoạn, số nhận từ 0 đến 1, số càng bé chạy càng nhanh
+
+transition: property duration delay timing
+*/
