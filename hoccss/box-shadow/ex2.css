@@ -1,0 +1,22 @@
+body {
+    font-family: system-ui;
+}
+
+.chat {
+    position: relative;
+    margin: 20px;
+    padding: 16px;
+    border-radius: 10px;
+    background: #fff;
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); */
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+}
+
+.chat::after {
+    content: "";
+    position: absolute;
+    bottom: -18px;
+    right: 30px;
+    border: 10px solid;
+    border-color: #fff transparent transparent;
+}

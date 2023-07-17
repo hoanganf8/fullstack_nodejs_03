@@ -1,0 +1,55 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: system-ui;
+}
+
+h2 {
+    font-size: 30px;
+    font-weight: 600;
+    display: none;
+}
+
+/* h1 {
+    font-size: 50px;
+    font-weight: 600;
+} */
+
+/*
+Breakpoints
+- Mobile: 0 - 575px
+- Tablet: 576px - 991px
+- Desktop/PC: > 992px
+*/
+
+/* Mobile & Tablet */
+@media screen and (max-width: 991px) {
+    
+}
+
+/* Mobile */
+@media screen and (max-width: 575px) {
+    .mobile {
+        display: block;
+    }
+}
+
+/* Tablet */
+@media screen and (min-width: 576px) and (max-width: 991px) {
+    .tablet {
+        display: block;
+    }
+}
+
+/* Desktop */
+@media screen and (min-width: 992px) {
+    .desktop {
+        display: block;
+    }
+}
