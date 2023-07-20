@@ -1,0 +1,54 @@
+/*Comment CSS*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: green;
+}
+.header .header-inner {
+  padding: 10px 15px;
+}
+.header .header-inner .logo {
+  max-height: 150px;
+  overflow: hidden;
+}
+.header .header-inner .logo img {
+  max-width: 100%;
+  height: auto;
+}
+.header .header-inner .menu {
+  background: green;
+}
+.header .header-inner .menu > ul {
+  display: flex;
+}
+.header .header-inner .menu > ul > li.item {
+  flex: 1 0 auto;
+}
+.header .header-inner .menu > ul > li.item > a {
+  display: block;
+  text-decoration: none;
+}
+.header .header-inner .menu > ul > li.item > a:hover {
+  color: red;
+}
+.header .header-inner .menu > ul > li.item > a::before {
+  content: "";
+}
+
+.footer {
+  padding: 20px 0;
+}
+.footer .copyright {
+  text-align: center;
+  color: grey;
+  font-size: 20%;
+}
+.footer .col-2 {
+  width: 50%;
+}
+
+/*# sourceMappingURL=ex02.css.map */

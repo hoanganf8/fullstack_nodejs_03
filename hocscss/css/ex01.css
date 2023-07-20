@@ -1,0 +1,18 @@
+body {
+  color: #333;
+  font-size: 1.6rem;
+}
+
+.header {
+  padding: 10px 0;
+}
+
+.header .header_inner {
+  background: green;
+}
+
+.header .logo {
+  height: 150px;
+}
+
+/*# sourceMappingURL=ex01.css.map */
