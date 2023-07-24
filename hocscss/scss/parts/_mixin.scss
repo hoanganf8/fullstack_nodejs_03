@@ -1,0 +1,52 @@
+// @mixin center {
+//   width: 1200px;
+//   margin: 0 auto;
+// }
+
+// @mixin center($width, $space: 0) {
+//   width: $width;
+//   margin: $space auto;
+// }
+
+@mixin position($type, $x, $y) {
+  position: absolute;
+  @if ($type == tl) {
+    top: $x;
+    left: $y;
+  } @else if ($type == tr) {
+    top: $x;
+    right: $y;
+  } @else if ($type == bl) {
+    bottom: $x;
+    left: $y;
+  } @else if ($type == br) {
+    bottom: $x;
+    right: $y;
+  } @else {
+    inset: 0;
+  }
+}
+
+@mixin center($type) {
+  @if ($type == flex) {
+    display: flex;
+    justify-content: center;
+  } @else if ($type == position) {
+    position: relative;
+    > * {
+      position: absolute;
+      left: 50%;
+      translate: -50%;
+    }
+  } @else if ($type == margin) {
+    > * {
+      margin: 0 auto;
+    }
+  } @else {
+    text-align: center;
+    > * {
+      display: inline-block;
+      text-align: left;
+    }
+  }
+}

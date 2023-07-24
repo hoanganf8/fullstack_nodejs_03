@@ -1,0 +1,53 @@
+/*
+Vòng lặp for through
+=> Xác định số lần lặp đã biết trước
+*/
+
+// $number: 12;
+
+// @for $i from 0 through $number - 1 {
+//   //Chạy đi chạy lại $number lần
+//   .col-#{$number - $i} {
+//     --column-size: #{$number - $i};
+//   }
+// }
+
+// $sizes: 40, 60, 80, 100, 150;
+
+// $length: length($sizes);
+
+// $index: 0;
+
+// @each $size in $sizes {
+//   $index: $index + 1;
+//   .col-#{$size} {
+//     @if ($index == $length) {
+//       max-width: #{$size}px;
+//     } @else {
+//       width: #{$size}px;
+//     }
+//   }
+// }
+
+// $sizes: (small, 40, normal), (medium, 60, 400), (large, 80, 600);
+
+// $sizes: (small 40 normal), (medium 60 400), (large 80 600);
+
+// @each $name, $size, $weight in $sizes {
+//   .col-#{$name} {
+//     width: #{$size}px;
+//     font-weight: $weight;
+//   }
+// }
+
+$sizes: (
+  small: 40,
+  medium: 60,
+  large: 80,
+);
+
+@each $name, $size in $sizes {
+  .col-#{$name} {
+    width: #{$size}px;
+  }
+}
