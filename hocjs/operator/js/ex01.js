@@ -135,6 +135,13 @@ Các trường hợp còn lại
 7. Toán tử &&
 */
 
-var a = "Hoàng An";
-var b = a && "F8";
+// var a = "Hoàng An";
+// var b = a && "F8";
+// console.log(b);
+
+/*
+8. Toán tử ||
+*/
+var a = 0;
+var b = a || "F8"; //Đừng nhầm lẫn với nullish
 console.log(b);
