@@ -6,6 +6,8 @@ import { client } from "./client.js";
 import { config } from "./config.js";
 const { PAGE_LIMIT } = config;
 
+const paginationNav = document.querySelector(".pagination-nav");
+
 const render = (posts) => {
   const stripHtml = (html) => html.replace(/(<([^>]+)>)/gi, "");
 
@@ -35,27 +37,29 @@ const render = (posts) => {
 
 const renderPaginate = (totalPages) => {
   //totalPages => Tổng số trang
-  const paginationNav = document.querySelector(".pagination-nav");
-  paginationNav.innerHTML = `<ul class="pagination">
-  <li class="page-item"><a class="page-link" href="#">Trước</a></li>
-  ${[...Array(totalPages).keys()]
-    .map(
-      (index) =>
-        `<li class="page-item ${
-          +currentPage === +index + 1 ? "active" : ""
-        }"><a class="page-link page-number" href="#">${index + 1}</a></li>`,
-    )
-    .join("")}
-  <li class="page-item"><a class="page-link" href="#">Sau</a></li>
-</ul>`;
-
-  paginationNav.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (e.target.classList.contains("page-number")) {
-      //Gọi hàm chuyển trang
-      goPage(+e.target.innerText);
+  paginationNav.innerText = "";
+  if (totalPages > 1) {
+    paginationNav.innerHTML = `<ul class="pagination">
+    ${
+      currentPage > 1
+        ? `<li class="page-item"><a class="page-link page-prev" href="#">Trước</a></li>`
+        : ""
     }
-  });
+    ${[...Array(totalPages).keys()]
+      .map(
+        (index) =>
+          `<li class="page-item ${
+            +currentPage === +index + 1 ? "active" : ""
+          }"><a class="page-link page-number" href="#">${index + 1}</a></li>`,
+      )
+      .join("")}
+    ${
+      currentPage < totalPages
+        ? `<li class="page-item"><a class="page-link page-next" href="#">Sau</a></li>`
+        : ""
+    }
+  </ul>`;
+  }
 };
 
 const goPage = (page) => {
@@ -63,6 +67,7 @@ const goPage = (page) => {
   getPosts({
     _sort: sort,
     _order: order,
+    q: keyword,
     _page: currentPage,
     _limit: PAGE_LIMIT,
   });
@@ -105,6 +110,8 @@ searchForm.addEventListener("submit", (e) => {
     _sort: sort,
     _order: order,
     q: keyword,
+    _page: currentPage,
+    _limit: PAGE_LIMIT,
   });
 
   keywordEl.value = "";
@@ -118,5 +125,26 @@ sortByEl.addEventListener("change", (e) => {
     _sort: sort,
     _order: order,
     q: keyword,
+    _page: currentPage,
+    _limit: PAGE_LIMIT,
   });
+});
+
+//Xử lý chuyển trang
+paginationNav.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (e.target.classList.contains("page-number")) {
+    //Gọi hàm chuyển trang
+    goPage(+e.target.innerText);
+  }
+
+  //Prev
+  if (e.target.classList.contains("page-prev")) {
+    goPage(currentPage - 1);
+  }
+
+  //Next
+  if (e.target.classList.contains("page-next")) {
+    goPage(currentPage + 1);
+  }
 });
