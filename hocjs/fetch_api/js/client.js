@@ -3,8 +3,14 @@ import { config } from "./config.js";
 const { SERVER_API } = config;
 
 export const client = {
+  serverApi: SERVER_API,
+
+  setUrl: function (url) {
+    this.serverApi = url;
+  },
+
   send: async function (url, method = "GET", body = null) {
-    url = `${SERVER_API}${url}`;
+    url = `${this.serverApi}${url}`;
 
     const options = {
       method,
