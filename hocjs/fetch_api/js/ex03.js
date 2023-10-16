@@ -33,12 +33,14 @@ const app = {
       root.innerHTML = `<div class="container py-3">
         <h2 class="text-center">Chào mừng bạn đã quay trở lại</h2>
         <hr/>
-        <ul class="list-unstyled d-flex gap-3">
-          <li>Chào bạn: <b>Hoàng An</b></li>
-          <li><a href="#">Đăng xuất</a></li>
+        <ul class="list-unstyled d-flex gap-3 profile">
+          <li>Chào bạn: <b class="name">Loading...</b></li>
+          <li><a href="#" class="logout">Đăng xuất</a></li>
         </ul>
       </div>`;
-      this.getProfile();
+      const profileName = document.querySelector(".profile .name");
+      this.getProfile(profileName);
+      this.eventLogout();
     } else {
       root.innerHTML = `<div class="container py-3">
       <div class="row justify-content-center">
@@ -84,7 +86,7 @@ const app = {
       this.render();
     }
   },
-  getProfile: async function () {
+  getProfile: async function (el) {
     let loginTokens = localStorage.getItem("login_tokens");
     loginTokens = JSON.parse(loginTokens);
 
@@ -93,7 +95,18 @@ const app = {
     //Thêm token vào request header
     client.setToken(accessToken);
     const { response, data } = await client.get("/auth/profile");
-    console.log(response, data);
+
+    if (response.ok) {
+      //Token hợp lệ
+      el.innerText = data.name;
+    } else {
+      //Xử lý logout
+      this.handleLogout();
+    }
+  },
+  handleLogout: function () {
+    localStorage.removeItem("login_tokens");
+    this.render();
   },
   addLoading: function () {
     const form = document.querySelector(".login");
@@ -118,6 +131,13 @@ const app = {
       const email = emailEl.value;
       const password = passwordEl.value;
       this.handleLogin({ email, password }, msg);
+    });
+  },
+  eventLogout: function () {
+    const logout = document.querySelector(".profile .logout");
+    logout.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.handleLogout();
     });
   },
 };
