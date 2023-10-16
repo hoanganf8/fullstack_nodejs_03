@@ -10,6 +10,8 @@ Các loại Authentication
 2. Authorization
 - Ủy quyền
 - Cho phép bạn làm gì
+
+Request (Header Token) -> Server -> Response Data
 */
 import { client } from "./client.js";
 client.setUrl("https://api.escuelajs.co/api/v1");
@@ -36,6 +38,7 @@ const app = {
           <li><a href="#">Đăng xuất</a></li>
         </ul>
       </div>`;
+      this.getProfile();
     } else {
       root.innerHTML = `<div class="container py-3">
       <div class="row justify-content-center">
@@ -63,6 +66,9 @@ const app = {
     }
   },
   isLogin: function () {
+    if (localStorage.getItem("login_tokens")) {
+      return true;
+    }
     return false;
   },
   handleLogin: async function (data, msg) {
@@ -72,7 +78,22 @@ const app = {
     this.removeLoading();
     if (!response.ok) {
       msg.innerText = "Email hoặc mật khẩu không chính xác";
+    } else {
+      //Nếu thành công -> Lưu token vào Storage
+      localStorage.setItem("login_tokens", JSON.stringify(tokens));
+      this.render();
     }
+  },
+  getProfile: async function () {
+    let loginTokens = localStorage.getItem("login_tokens");
+    loginTokens = JSON.parse(loginTokens);
+
+    const { access_token: accessToken } = loginTokens;
+
+    //Thêm token vào request header
+    client.setToken(accessToken);
+    const { response, data } = await client.get("/auth/profile");
+    console.log(response, data);
   },
   addLoading: function () {
     const form = document.querySelector(".login");
