@@ -11,6 +11,7 @@ export const client = {
   setToken: function (token) {
     this.token = token;
   },
+
   send: async function (url, method = "GET", body = null) {
     url = `${this.serverApi}${url}`;
     const headers = {

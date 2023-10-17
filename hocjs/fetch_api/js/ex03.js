@@ -14,17 +14,8 @@ Các loại Authentication
 Request (Header Token) -> Server -> Response Data
 */
 import { client } from "./client.js";
+import { requestRefresh } from "./token.js";
 client.setUrl("https://api.escuelajs.co/api/v1");
-
-// const handleLogin = async (data) => {
-//   const { data: tokens } = await client.post("/auth/login", data);
-//   console.log(tokens);
-// };
-
-// // handleLogin({
-// //   email: "john@mail.com",
-// //   password: "changeme",
-// // });
 
 const app = {
   render: function () {
@@ -90,7 +81,8 @@ const app = {
     let loginTokens = localStorage.getItem("login_tokens");
     loginTokens = JSON.parse(loginTokens);
 
-    const { access_token: accessToken } = loginTokens;
+    const { access_token: accessToken, refresh_token: refreshToken } =
+      loginTokens;
 
     //Thêm token vào request header
     client.setToken(accessToken);
@@ -100,8 +92,19 @@ const app = {
       //Token hợp lệ
       el.innerText = data.name;
     } else {
-      //Xử lý logout
-      this.handleLogout();
+      //Gọi request refresh token
+      const newToken = await requestRefresh(refreshToken);
+      //Không lấy được token mới -> Đăng xuất
+      if (!newToken) {
+        //Xử lý logout
+        this.handleLogout();
+      } else {
+        //Cập nhật token mới vào localStorage
+        localStorage.setItem("login_tokens", JSON.stringify(newToken));
+
+        //Render
+        this.render();
+      }
     }
   },
   handleLogout: function () {
@@ -143,3 +146,64 @@ const app = {
 };
 
 app.render();
+
+/*
+accessToken -> Lấy Data
+refreshToken -> Cấp lại accessToken mới
+
+1. Danh sách khóa học -> token chưa hết hạn
+
+2. Lấy danh sách bài viết -> Token hết hạn
+
+3. Lấy danh sách bình luận -> Token hết hạn
+
+Khi logout -> Gửi request logout lên Server
+*/
+
+let isExpired = false; //Request check expire
+let token = "old";
+let requestRefreshPromise = null;
+
+const requestRefreshApi = () => {
+  if (!requestRefreshPromise) {
+    console.log("Request refresh token");
+    requestRefreshPromise = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("New Token");
+      }, 1000);
+    });
+  }
+
+  return requestRefreshPromise;
+};
+const requestApi = async (resource) => {
+  if (resource === "Khóa học Pro") {
+    isExpired = true;
+  }
+  if (isExpired) {
+    const newToken = await requestRefreshApi();
+    token = newToken;
+    isExpired = false;
+  }
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(resource + `Token: ${token}`);
+    }, 1000);
+  });
+};
+
+(async () => {
+  const res1 = await requestApi("Slider");
+  console.log(res1);
+})();
+
+(async () => {
+  const res2 = await requestApi("Khóa học Pro");
+  console.log(res2);
+})();
+
+(async () => {
+  const res3 = await requestApi("Khóa học Free");
+  console.log(res3);
+})();
