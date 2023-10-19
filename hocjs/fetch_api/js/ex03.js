@@ -207,3 +207,11 @@ const requestApi = async (resource) => {
   const res3 = await requestApi("Khóa học Free");
   console.log(res3);
 })();
+
+const getBanner = async () => {
+  client.setUrl("https://api-gateway.fullstack.edu.vn/api");
+  const { data } = await client.get("/banners?placement=home&type=slideshow");
+  console.log(data);
+};
+
+getBanner();
