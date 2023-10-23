@@ -10,8 +10,11 @@
   "author": "Hoàng An F8",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.3.2",
+    "bootstrap": "^4.5.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }
