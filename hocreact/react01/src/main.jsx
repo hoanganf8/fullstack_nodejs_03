@@ -51,4 +51,8 @@ const rootEl = document.querySelector("#root");
 // );
 
 //Render UI
-ReactDOM.createRoot(rootEl).render(<App />);
+ReactDOM.createRoot(rootEl).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
