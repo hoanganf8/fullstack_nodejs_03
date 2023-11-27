@@ -24,3 +24,7 @@ Ví dụ:
 ## Luồng chạy
 
 Route --> RootLayout --> Custom Layout --> Page --> Render JSX
+
+## Middleware
+
+Request --> Middleware --> Route --> RootLayout --> Custom Layout --> Page --> Render JSX

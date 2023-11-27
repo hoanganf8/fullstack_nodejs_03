@@ -1,5 +1,6 @@
 const ProductDetail = ({ params }) => {
   const { id } = params;
+
   return (
     <div>
       <h1>Chuyên mục: {id[0]}</h1>
@@ -9,3 +10,5 @@ const ProductDetail = ({ params }) => {
 };
 
 export default ProductDetail;
+
+//http://localhost:3001/san-pham?status=active&keywords=abc
