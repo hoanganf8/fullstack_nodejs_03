@@ -1,0 +1,20 @@
+{
+  "todos": [
+    {
+      "name": "Học NextJS không khó",
+      "id": 1
+    },
+    {
+      "name": "Học Javascript",
+      "id": 2
+    },
+    {
+      "name": "Học HTML",
+      "id": 3
+    },
+    {
+      "name": "Học NodeJS",
+      "id": 4
+    }
+  ]
+}
