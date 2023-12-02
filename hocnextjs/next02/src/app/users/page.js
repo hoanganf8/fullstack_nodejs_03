@@ -6,7 +6,7 @@ const UserPage = () => {
     <div>
       <h1>Danh sách Users</h1>
       <Users />
-      <UserAdd />
+      {/* <UserAdd /> */}
     </div>
   );
 };
