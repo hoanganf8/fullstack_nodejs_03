@@ -1,0 +1,11 @@
+.title {
+  color: green;
+  border: 1px solid green;
+}
+
+.box {
+  box-shadow: 5px 5px 5px 5px #ccc;
+  .inner {
+    color: red;
+  }
+}
