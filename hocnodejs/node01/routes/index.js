@@ -1,15 +1,14 @@
 import express from "express";
+import homeController from "../controllers/home.controller.js";
+import authController from "../controllers/auth.controller.js";
+
 const router = express.Router();
-router.get("/", (req, res) => {
-  res.send("<h1>Học Express không khó</h1>");
-});
+router.get("/", homeController.index);
 
-router.get("/san-pham", (req, res) => {
-  res.send("<h1>Danh sách sản phẩm</h1>");
-});
+router.get("/san-pham", homeController.showProducts);
 
-router.get("/dang-nhap", (req, res) => {
-  res.send("<h1>Đăng nhập</h1>");
-});
+router.get("/dang-nhap", authController.login);
+
+router.post("/dang-nhap", authController.handleLogin);
 
 export default router;
