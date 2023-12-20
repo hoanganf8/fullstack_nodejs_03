@@ -1,10 +1,10 @@
 import express from "express";
 import expressEjsLayouts from "express-ejs-layouts";
 import session from "express-session";
+import flash from "connect-flash";
 import bodyParser from "body-parser";
 import routerIndex from "./routes/index.js";
 import routerUsers from "./routes/users.js";
-import authMiddleware from "./middlewares/auth.middleware.js";
 import cookieParser from "cookie-parser";
 const app = express();
 
@@ -15,6 +15,8 @@ app.use(
     name: "f8_session_id",
   }),
 );
+//Khởi tạo connect flash
+app.use(flash());
 
 app.use(cookieParser()); //Đọc cookie từ phía client
 app.use(bodyParser.urlencoded());
