@@ -13,6 +13,12 @@ module.exports = {
     }
     return sql`SELECT * FROM users ${filter}`;
   },
+  existEmail: (email) => {
+    return sql`SELECT id FROM users WHERE email=${email}`;
+  },
+  create: ({ name, email, status }) => {
+    return sql`INSERT INTO users(name, email, status, created_at, updated_at) VALUES(${name}, ${email}, ${status}, NOW(), NOW())`;
+  },
 };
 
 /*

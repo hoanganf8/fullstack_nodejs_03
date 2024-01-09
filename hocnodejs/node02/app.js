@@ -9,6 +9,7 @@ const flash = require("connect-flash");
 const expressLayouts = require("express-ejs-layouts");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+const validateMiddleware = require("./middlewares/validate.middleware");
 var app = express();
 app.use(
   session({
@@ -29,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(validateMiddleware);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
