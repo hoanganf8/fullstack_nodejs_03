@@ -26,6 +26,9 @@ module.exports = {
   update: ({ name, email, status }, id) => {
     return sql`UPDATE users SET name=${name}, email=${email}, status=${status}, updated_at=NOW() WHERE id=${id}`;
   },
+  delete: (id) => {
+    return sql`DELETE FROM users WHERE id = ${id}`;
+  },
 };
 
 /*

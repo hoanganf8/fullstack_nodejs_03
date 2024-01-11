@@ -46,6 +46,7 @@ module.exports = {
   },
   edit: async (req, res, next) => {
     const { id } = req.params;
+    req.session.currentId = id;
     try {
       const user = await userModel.find(id);
       if (!user.length) {
@@ -60,8 +61,11 @@ module.exports = {
       return next(e);
     }
   },
-  handleEdit: async (req, res) => {
+  handleEdit: async (req, res, next) => {
     const { id } = req.params;
+    if (id !== req.session.currentId) {
+      return next(new Error("Back..."));
+    }
     const body = await req.validate(req.body, {
       name: string().required("Tên bắt buộc phải nhập"),
       email: string()
@@ -87,5 +91,15 @@ module.exports = {
       req.flash("msg", "Cập nhật người dùng thành công");
     }
     return res.redirect("/users/edit/" + id);
+  },
+  delete: async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      await userModel.delete(id);
+      req.flash("msg", "Xóa người dùng thành công");
+      return res.redirect("/users");
+    } catch (e) {
+      return next(e);
+    }
   },
 };
