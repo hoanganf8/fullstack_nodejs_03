@@ -9,6 +9,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasOne(models.Phone, {
+        foreignKey: "user_id",
+        as: "phone",
+      });
+      User.hasMany(models.Post, {
+        foreignKey: "user_id",
+        as: "posts",
+      });
+      User.belongsToMany(models.Course, {
+        foreignKey: "user_id",
+        through: "courses_users",
+        as: "courses",
+      });
     }
   }
   User.init(
@@ -32,6 +45,8 @@ module.exports = (sequelize, DataTypes) => {
       //Nếu muốn vô hiệu hóa 2 trường này, khai báo timestamps: false
       createdAt: "created_at",
       updatedAt: "updated_at",
+      deletedAt: "deleted_at",
+      // paranoid: true, //Kích hoạt xóa mềm (timestamps: true)
     },
   );
   return User;
