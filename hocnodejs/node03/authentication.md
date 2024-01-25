@@ -30,3 +30,28 @@ Mật khẩu: Mã hóa 1 chiều
   --> Đồng nhất các cách xác thực: cách lưu session, cách lấy thông tin user, cách hiển thị lời chào, cách đăng xuất
 
 => Thư viện hỗ trợ cho việc xác thực: passport.js
+
+# Đăng nhập thông qua mạng xã hội
+
+Sử dụng thông tin tài khoản mạng xã hội để lấy user --> Insert vào database --> Thực login trên thông tin đó
+
+## 2 bước triển khai
+
+- Tạo link chuyển hướng tới các mạng xã hội để đăng nhập
+- Xử lý lấy dữ liệu và insert dữ liệu vào database sau khi đăng nhập xong các mạng xã hội (Khi đăng nhập xong, chuyển hướng về callback url)
+
+## Database
+
+Table providers
+
+- id
+- name
+
+Table users
+
+- id
+- name
+- email
+- password
+- status
+- provider_id

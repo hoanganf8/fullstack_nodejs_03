@@ -4,12 +4,41 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const expressEjsLayouts = require("express-ejs-layouts");
+const session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("passport");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var authRouter = require("./routes/auth");
+const { User } = require("./models/index");
+const passportLocal = require("./passports/passport.local");
+const passportGoogle = require("./passports/passport.google");
+const authMiddleware = require("./middlewares/auth.middleware");
 
 var app = express();
+app.use(
+  session({
+    secret: "f8",
+    resave: false,
+    saveUninitialized: true,
+  }),
+);
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async function (id, done) {
+  const user = await User.findByPk(id);
+  done(null, user);
+});
+
+passport.use("local", passportLocal);
+passport.use("google", passportGoogle);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -23,6 +52,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/auth", authRouter);
+app.use(authMiddleware);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
