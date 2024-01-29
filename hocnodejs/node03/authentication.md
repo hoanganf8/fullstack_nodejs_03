@@ -55,3 +55,28 @@ Table users
 - password
 - status
 - provider_id
+
+# Xây dựng chức năng quên mật khẩu
+
+## Xây dựng form quên mật khẩu (Forgot Password)
+
+- Nhận email từ client
+- Kiểm tra email có tồn tại trong Database hay không?
+- Tạo token (Không nên dùng jwt). md5(Math.random() + new Date().getTime())
+
+* Cập nhật token vào trong bảng users (Field: reset_token) và thời gian hết hạn (Field: expired_token)
+* Gửi email cho user (Trong email có link để đặt lại mật khẩu)
+
+Cấu trúc link: http://tenmiencuaban/reset-password?token=abc
+
+## Xây dựng form đặt lại mật khẩu (Reset Password)
+
+- Kiểm tra token có khớp với database hay không? (Kiểm tra cả expired)
+- Nếu hợp lệ --> Lấy thông tin user theo token --> Hiển thị form đặt lại mật khẩu
+
+* Mật khẩu mới
+* Nhập lại mật khẩu mới
+
+- Xử lý cập nhật lại mật khẩu cho user
+- Xóa token khỏi database
+- Gửi email thông báo cho user

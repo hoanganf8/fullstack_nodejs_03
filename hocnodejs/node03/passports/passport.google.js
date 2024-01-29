@@ -1,5 +1,5 @@
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
-
+const { User, Provider } = require("../models/index");
 module.exports = new GoogleStrategy(
   {
     clientID:
@@ -8,8 +8,23 @@ module.exports = new GoogleStrategy(
     callbackURL: "http://localhost:3000/auth/google/callback",
     scope: ["profile", "email"],
   },
-  function (request, accessToken, refreshToken, profile, done) {
-    console.log(profile);
-    done(null, {});
+  async function (request, accessToken, refreshToken, profile, done) {
+    const { displayName: fullname, email } = profile;
+    const [provider] = await Provider.findOrCreate({
+      where: { name: "google" },
+      defaults: { name: "google" },
+    });
+
+    const [user] = await User.findOrCreate({
+      where: { email },
+      defaults: {
+        fullname,
+        email,
+        status: true,
+        provider_id: provider.id,
+      },
+    });
+
+    done(null, user);
   },
 );
