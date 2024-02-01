@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       //   through: "courses_users",
       //   as: "courses",
       // });
+      User.belongsToMany(models.Role, {
+        foreignKey: "user_id",
+        through: "users_roles",
+      });
     }
   }
   User.init(
@@ -47,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       //Nếu muốn vô hiệu hóa 2 trường này, khai báo timestamps: false
       createdAt: "created_at",
       updatedAt: "updated_at",
-      deletedAt: "deleted_at",
+      // deletedAt: "deleted_at",
       // paranoid: true, //Kích hoạt xóa mềm (timestamps: true)
     },
   );

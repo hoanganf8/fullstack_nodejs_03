@@ -10,7 +10,7 @@ module.exports = {
     }
     if (keyword) {
       filters[Op.or] = {
-        name: {
+        fullname: {
           [Op.iLike]: `%${keyword}%`,
         },
         email: {
@@ -21,13 +21,13 @@ module.exports = {
     const users = await User.findAll({
       order: [
         ["id", "desc"],
-        ["name", "asc"],
+        ["fullname", "asc"],
       ],
       where: filters,
-      include: {
-        model: Phone,
-        as: "phone",
-      },
+      // include: {
+      //   model: Phone,
+      //   as: "phone",
+      // },
     });
 
     // for (let user of users) {
