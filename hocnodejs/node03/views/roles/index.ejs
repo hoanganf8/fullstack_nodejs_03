@@ -10,13 +10,16 @@
     </tr>
   </thead>
   <tbody>
+    <% roles.forEach((role, index) => { %>
     <tr>
-      <td>1</td>
-      <td>1</td>
-      <td><a href="#" class="btn btn-warning">Sửa</a></td>
+      <td><%= index+1 %></td>
+      <td><%= role.name %></td>
+      <td>
+        <a href="/roles/edit/<%= role.id %>" class="btn btn-warning">Sửa</a>
+      </td>
       <td>
         <form
-          action=""
+          action="/roles/delete/<%= role.id %>"
           method="post"
           onsubmit="return confirm('Bạn có chắc chắn?')"
         >
@@ -24,5 +27,6 @@
         </form>
       </td>
     </tr>
+    <% }) %>
   </tbody>
 </table>
