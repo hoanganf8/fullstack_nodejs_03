@@ -1,5 +1,8 @@
 <h1>Danh sách người dùng</h1>
+<% if (req.user.can('users.create')) { %>
 <a href="/users/add" class="mb-2 btn btn-success">Thêm mới</a>
+<% } %>
+
 <form action="" class="mb-3">
   <div class="row">
     <div class="col-3">
