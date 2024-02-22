@@ -11,6 +11,7 @@ const passport = require("passport");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var authRouter = require("./routes/auth");
+var apiRouter = require("./routes/api");
 const { User } = require("./models/index");
 const passportLocal = require("./passports/passport.local");
 const passportGoogle = require("./passports/passport.google");
@@ -51,6 +52,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/api", apiRouter);
 app.use("/auth", authRouter);
 app.use(authMiddleware);
 app.use("/", indexRouter);
