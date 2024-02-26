@@ -9,5 +9,6 @@ router.post("/v1/users", userController.store);
 router.post("/v1/auth/login", authController.login);
 router.get("/v1/auth/profile", authMiddleware, authController.profile);
 router.post("/v1/auth/logout", authMiddleware, authController.logout);
+router.post("/v1/auth/refresh", authController.refresh);
 
 module.exports = router;
