@@ -16,8 +16,26 @@ const { User } = require("./models/index");
 const passportLocal = require("./passports/passport.local");
 const passportGoogle = require("./passports/passport.google");
 const authMiddleware = require("./middlewares/auth.middleware");
-
+const cors = require("cors");
+const whitelist = ["http://127.0.0.1:55580"];
 var app = express();
+// app.use((req, res, next) => {
+//   res.set("Access-Control-Allow-Origin", "http://127.0.0.1:55580");
+//   res.set("Access-Control-Allow-Headers", "*");
+//   next();
+// });
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (process.env.NODE_ENV === "development" || !process.env.NODE_ENV) {
+      return callback(null, true);
+    }
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
 app.use(
   session({
     secret: "f8",
@@ -52,7 +70,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/api", apiRouter);
+app.use("/api", cors(corsOptions), apiRouter);
 app.use("/auth", authRouter);
 app.use(authMiddleware);
 app.use("/", indexRouter);
