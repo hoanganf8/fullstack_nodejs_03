@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const { object, string } = require("yup");
 const bcrypt = require("bcrypt");
 const UserTransformer = require("../../../transformers/user.transformer");
+const client = require("../../../utils/redis");
 module.exports = {
   index: async (req, res) => {
     const response = {};
@@ -41,7 +42,17 @@ module.exports = {
         options.limit = limit;
         options.offset = offset;
       }
-      const { count, rows: users } = await User.findAndCountAll(options);
+
+      //Check bộ nhớ cache có users. Giả sử key: users-cache
+      let resultCache = await (await client).get("users");
+      if (!resultCache) {
+        resultCache = await User.findAndCountAll(options);
+        await (await client).set("users", JSON.stringify(resultCache));
+      } else {
+        resultCache = JSON.parse(resultCache);
+      }
+      const { count, rows: users } = resultCache;
+
       Object.assign(response, {
         status: 200,
         message: "Success",
